@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page-game.css') }}" />
+	<title>Jogo da Forca</title>
+</head>
+<body>
+	<div class="container">
+		<header class="title">
+			<h1>Jogo da Forca</h1>
+		</header>
+
+		<section class="bodyOfThePage">
+			<div class="gameInformation">
+				<p id="wordCategory"></p>
+				<p id="letters"></p>
+			</div>
+
+			<div class="image" id="image"></div>
+
+			<div class="shoWord">
+				<p id="word"></p>
+			</div>
+
+			<div class="virtualKeyboard">
+				<div class="buttonVirtualKeyboard" id="buttonVirtualKeyboard"></div>
+				<div class="keyboard" id="virtualKeyboard"></div>
+			</div>
+		</section>
+
+		<footer class="footerPage">
+			<a href="/root/viewWords">Cadastre novas palavras</a>
+		</footer>
+	</div>
+	<div id="finishWindow"></div>
+	<script src="{{ url_for('static', filename='js/page-game.js') }}"></script>
+	<script>
+		const game = createGame('{{word}}', '{{category}}');
+		const screen = createScreen();
+		const keyboard = createKeyboardLettersListener();
+
+		game.subscribe(screen.updateScreen);
+
+		keyboard.subscribe(game.play);
+		keyboard.allowComputerKeyboard();
+
+		screen.updateScreen(game.state);
+	</script>
+</body>
+</html>

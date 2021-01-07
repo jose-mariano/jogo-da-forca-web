@@ -1,0 +1,55 @@
+{% extends 'base-root-pages.html' %}
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page-add-items.css') }}">
+{% endblock %}
+
+{% block title %}Add Items{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="container-addElements">
+		<div class="addItem">
+			<h4>Add word</h4>
+
+			<label>
+				Word: <input type="text" id="word" />
+			</label>
+
+			<br/>
+
+			<label>
+				Category:
+				<select id="categoryWord">
+					{% for category in categoryWords %}
+						<option value="{{ category[0] }}">{{ category[1] }}</option>
+					{% endfor %}
+				</select>
+			</label>
+
+			<button class="button" id="addWord">Add</button>
+		</div>
+
+		<div class="addItem category">
+			<h4>Add category</h4>
+
+			<label>
+				Category: <input type="text" id="category" />
+			</label>
+
+			<button class="button" id="addCategory">Add</button>
+		</div>
+	</div>
+
+	<form action="/root/viewNewItems" method="post" class="formViewItems" id="formViewItems">
+		<h4>Items to be added</h4>
+		<input type="submit" class="button" value="Save" />
+		
+		<hr/>
+
+		<input type="hidden" id="newCategory" name="newCategory" />
+		<input type="hidden" id="newWords" name="newWords" />
+		<div id="viewItems"></div>
+	</form>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='js/page-add-items.js') }}"></script>
+{% endblock %}
