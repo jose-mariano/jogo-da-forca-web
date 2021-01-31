@@ -1,0 +1,42 @@
+{% extends "base-root-pages.html" %}
+{% block title %}View new items{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page-view-new-items.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="container-items">
+		<h1 class="title">Items</h1>
+		{% for category in items["categories"]["add"] %}
+			<div class="item add">
+				<p class="title">ADD</p>
+				<p>Category: {{category}}</p>
+			</div>
+		{% endfor %}
+
+		{% for category in items["categories"]["not_add"] %}
+			<div class="item not-add">
+				<p class="title">NOT ADD</p>
+				<p>Category: {{category}}</p>
+			</div>
+		{% endfor %}
+
+		{% for word in items["words"]["add"] %}
+			<div class="item add">
+				<p class="title">ADD</p>
+				<p>Word: {{ word[0] }}</p>
+				<p>Category: {{ word[1] }}</p>
+			</div>
+		{% endfor %}
+
+		{% for word in items["words"]["not_add"] %}
+			<div class="item not-add">
+				<p class="title">NOT ADD</p>
+				<p>Word: {{ word[0] }}</p>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
